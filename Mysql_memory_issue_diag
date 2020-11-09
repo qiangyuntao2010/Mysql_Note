@@ -1,0 +1,50 @@
+Mysql memory allocation code: 
+
+init_sql_alloc() —>>> on failure to allocate memory —>> sql_alloc_error_handler() —>>> LogErr(ERROR_LEVEL, ER_SERVER_OUT_OF_RESOURCES); 
+This error is mapped to —>>> 
+ER_SERVER_OUT_OF_RESOURCES
+
+
+script:
+
+
+free -h
+pmap -x <pid_of_mysql>
+numastat -m
+cat /proc/meminfo
+cat /proc/buddyinfo
+cat /proc/zoneinfo
+
+
+tee mem_usage_1.txt
+show global variables;
+show global status;
+show engine innodb status;
+show slave status\g
+show master status;
+xa recover convert xid;
+show full processlist;
+select * from information_schema.innodb_trx order by trx_started;
+select * from performance_schema.threads order by thread_id;
+select * from sys.session order by thd_id;
+select * from sys.memory_by_host_by_current_bytes;
+select * from sys.memory_by_thread_by_current_bytes;
+select * from sys.memory_by_user_by_current_bytes;
+select * from sys.memory_global_by_current_bytes;
+select * from sys.memory_global_total ;
+select sleep(300);
+show global status;
+show engine innodb status;
+show slave status\g
+show master status;
+xa recover convert xid;
+show full processlist;
+select * from information_schema.innodb_trx order by trx_started;
+select * from performance_schema.threads order by thread_id;
+select * from sys.session order by thd_id;
+select * from sys.memory_by_host_by_current_bytes;
+select * from sys.memory_by_thread_by_current_bytes;
+select * from sys.memory_by_user_by_current_bytes;
+select * from sys.memory_global_by_current_bytes;
+select * from sys.memory_global_total ;
+notee 
