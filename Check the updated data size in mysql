@@ -1,0 +1,6 @@
+## You can use this command to check the updated data size on one standalone mysql server
+## change the time as you want to check, such as 1 day, 2 day, etc
+## You can refer this output to configure you innodb buffer bool, which can load your data in memory and accelerate your app
+## But you the size of data is not the really accessed data, just an approx size
+
+mysql> SELECT table_schema,table_name, sum( data_length + index_length ) / 1024 / 1024 /1024 "Data Base Size in GB", update_time date FROM information_schema.tables WHERE table_schema not in ('information_schema') and update_time > (NOW() - INTERVAL 1440 MINUTE);
